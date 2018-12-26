@@ -7,3 +7,6 @@ prerequisite for running the code
     pip install vaderSentiment
     - if you are using pycharm then the package is available to install.
 - install flask CORs for cross plateform dependency
+
+
+Html file is wrriten using Angular2.
