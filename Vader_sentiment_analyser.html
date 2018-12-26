@@ -1,10 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+  <title>Sentiment Analyser</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 </head>
-<body>
-$END$
+<body style="background-image: url(sentiment.jpg);">
+
+<div class="jumbotron text-center" >
+  <h1>The Sentiment Analyser </h1>
+</div>
+
+<div class="container" ng-app="myApp" ng-controller="myCtrl">
+  <div class="row">
+    <div class="form-group">
+      <label for="comment" style="color: white;">Review:</label>
+      <textarea class="form-control" rows="5" id="comment" ng-model="reviewdata" ></textarea>
+    </div>
+    <button type="button" class="btn btn-primary" ng-click="myFunc(reviewdata)">Analyse Review</button>
+  </div>
+  <div class="row">
+  <!-- {{responsedata}} -->
+  <div ng-if="responsedata === 'positive'">
+  <i class="fa fa-smile-o" aria-hidden="true" style="font-size: 45px;color: green;"></i>
+  </div>
+  <div ng-if="responsedata === 'negative'">
+
+  <i class="fa fa-frown-o" aria-hidden="true" style="font-size: 45px;color: red;"></i>
+  </div>
+
+
+  </div>
+</div>
+<script>
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope,$http) {
+
+  $scope.myFunc = function(formdata) {debugger
+    // alert("hi");
+        $http({
+            method: 'POST',
+            url: 'http://127.0.0.1:8000/reviewAnalyser',
+            data: { review: formdata }
+        }).then(function(response) {
+        $scope.responsedata = response.data.result;
+    });
+  }
+});
+</script>
 </body>
 </html>
