@@ -9,4 +9,4 @@ prerequisite for running the code
 - install flask CORs for cross plateform dependency
 
 
-Html file is wrriten using Angular2.
+- Html file is wrriten using Angular2.
